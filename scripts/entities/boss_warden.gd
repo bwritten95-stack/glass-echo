@@ -16,8 +16,8 @@ func _ready() -> void:
 	move_speed = 70.0
 	score_value = 2500
 	super._ready()
-	_visual.color = Color(0.75, 0.9, 1.0)
-	scale = Vector2(1.6, 1.6)
+	_visual.color = Color(0.95, 0.55, 0.75)
+	scale = Vector2(1.85, 1.85)
 	add_to_group("boss")
 	EventBus.boss_spawned.emit()
 	_phase = Phase.INTRO
@@ -26,6 +26,13 @@ func _ready() -> void:
 	modulate.a = 0.0
 	var tw := create_tween()
 	tw.tween_property(self, "modulate:a", 1.0, 0.45)
+	# Distinct crown pip
+	var crown := Polygon2D.new()
+	crown.polygon = PackedVector2Array([
+		Vector2(0, -30), Vector2(8, -18), Vector2(0, -22), Vector2(-8, -18)
+	])
+	crown.color = Color(1.0, 0.9, 0.95, 0.95)
+	add_child(crown)
 
 func _ai(delta: float) -> void:
 	_phase_time -= delta

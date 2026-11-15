@@ -14,6 +14,17 @@ func _ready() -> void:
 		return
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	print("AUTOPLAY: enabled args=", OS.get_cmdline_user_args())
+	if _has_arg("--force-win"):
+		# Don't let autoplay deaths spoil the win capture
+		RunState.hp = RunState.max_hp
+		call_deferred("_arm_player_invuln")
+
+func _arm_player_invuln() -> void:
+	var p := _player()
+	if p:
+		p.set("_invuln", 9999.0)
+		p.set("_alive", true)
+		RunState.hp = RunState.max_hp
 
 func _has_arg(name: String) -> bool:
 	return name in OS.get_cmdline_user_args()

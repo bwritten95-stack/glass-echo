@@ -62,7 +62,7 @@ func _process(_delta: float) -> void:
 			_boss_label.visible = false
 
 func _refresh() -> void:
-	_hp.text = "HP  " + "◆".repeat(maxi(RunState.hp, 0)) + "◇".repeat(maxi(RunState.max_hp - RunState.hp, 0))
+	_hp.text = "HP  %d/%d" % [RunState.hp, RunState.max_hp]
 	_wave.text = "Wave %d" % RunState.wave_index
 	_score.text = "%d" % RunState.score
 	_echoes.text = "Echoes %d/5" % RunState.echoes_alive

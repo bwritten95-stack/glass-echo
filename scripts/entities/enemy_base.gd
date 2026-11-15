@@ -67,17 +67,21 @@ func _die() -> void:
 	queue_free()
 
 func _spawn_death_fx() -> void:
-	var fx := Polygon2D.new()
-	fx.polygon = PackedVector2Array([
-		Vector2(0, -10), Vector2(8, 0), Vector2(0, 10), Vector2(-8, 0)
-	])
-	fx.color = _visual.color
-	fx.global_position = global_position
-	get_parent().add_child(fx)
-	var tw := fx.create_tween()
-	tw.tween_property(fx, "scale", Vector2(2.2, 2.2), 0.2)
-	tw.parallel().tween_property(fx, "modulate:a", 0.0, 0.2)
-	tw.tween_callback(fx.queue_free)
+	var parent := get_parent()
+	for i in 5:
+		var fx := Polygon2D.new()
+		fx.polygon = PackedVector2Array([
+			Vector2(0, -6), Vector2(5, 0), Vector2(0, 6), Vector2(-5, 0)
+		])
+		fx.color = _visual.color
+		fx.global_position = global_position
+		parent.add_child(fx)
+		var dir := Vector2.from_angle(TAU * float(i) / 5.0 + randf() * 0.2)
+		var tw := fx.create_tween()
+		tw.tween_property(fx, "global_position", global_position + dir * randf_range(28.0, 55.0), 0.28)
+		tw.parallel().tween_property(fx, "modulate:a", 0.0, 0.28)
+		tw.parallel().tween_property(fx, "scale", Vector2(1.8, 1.8), 0.28)
+		tw.tween_callback(fx.queue_free)
 
 func steer_toward(target: Vector2, speed: float) -> void:
 	var dir := (target - global_position)
