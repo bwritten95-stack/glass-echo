@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/entities/boss_warden.gd" id="1"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_boss"]
+radius = 22.0
+
+[node name="BossWarden" type="CharacterBody2D"]
+collision_layer = 8
+collision_mask = 7
+script = ExtResource("1")
+
+[node name="Aura" type="Polygon2D" parent="."]
+color = Color(0.4, 0.7, 1, 0.2)
+polygon = PackedVector2Array(0, -34, 28, -12, 22, 28, -22, 28, -28, -12)
+
+[node name="Visual" type="Polygon2D" parent="."]
+color = Color(0.75, 0.9, 1, 1)
+polygon = PackedVector2Array(0, -24, 20, -8, 16, 22, -16, 22, -20, -8)
+
+[node name="Core" type="Polygon2D" parent="."]
+color = Color(1, 1, 1, 0.85)
+polygon = PackedVector2Array(0, -8, 8, 0, 0, 8, -8, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_boss")

@@ -1,0 +1,35 @@
+# Godot 4
+.godot/
+*.translation
+
+# Exports / builds
+export/*.x86_64
+export/*.exe
+export/*.pck
+export/*.zip
+export/*.apk
+export/*.aab
+export/index.*
+export/*.wasm
+export/*.js
+export/*.html
+export/*.png
+export/*.ico
+
+# OS / editor junk
+.DS_Store
+Thumbs.db
+*~
+*.swp
+.vscode/
+.idea/
+
+# Local captures / userdata
+user://
+android/
+
+# Secrets — never commit
+.env
+.env.*
+*_token*
+*.pem
